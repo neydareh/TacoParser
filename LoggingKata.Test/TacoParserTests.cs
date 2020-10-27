@@ -27,7 +27,6 @@ namespace LoggingKata.Test
         [InlineData("31.597099,-84.176122,Taco Bell Albany...", -84.176122)]
         [InlineData("34.280205,-86.217115,Taco Bell Albertvill...", -86.217115)]
         [InlineData("32.92496,-85.961342,Taco Bell Alexander Cit...", -85.961342)]
-        
         public void ShouldParseLongitude(string line, double expected)
         {
             // TODO: Complete - "line" represents input data we will Parse to
@@ -44,8 +43,6 @@ namespace LoggingKata.Test
             //Assert
             Assert.Equal(expected, longitude);
         }
-
-
 
         //TODO: Create a test ShouldParseLatitude
         [Theory]
@@ -70,6 +67,23 @@ namespace LoggingKata.Test
 
             //Assert
             Assert.Equal(expected, latitude);
+        }
+
+        //TODO: Create more Tests
+
+        // Verify that TacoParser returns a TacoBell instance
+        [Fact]
+        public void TacoBellTest()
+        {
+            //Arrange
+            var tacoParser = new TacoParser();
+
+            //Act
+            var actual = tacoParser.Parse("34.073638, -84.677017, Taco Bell Acwort...");
+            var tacoBell = new TacoBell();
+
+            //Assert
+            Assert.IsType(tacoBell.GetType(), actual);
         }
     }
 }

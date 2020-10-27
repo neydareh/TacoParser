@@ -6,12 +6,12 @@ namespace LoggingKata
     {
         public void LogFatal(string log, Exception exception = null)
         {
-            Console.WriteLine($"Fatal: {log}, Exception {exception}");
+            Console.WriteLine($"Fatal: {log}, Exception {exception.Message}");
         }
 
         public void LogError(string log, Exception exception = null)
         {
-            Console.WriteLine($"Error: {log}, Exception {exception}");
+            Console.WriteLine($"Error: {log}, Exception {exception.Message}");
         }
 
         public void LogWarning(string log)
