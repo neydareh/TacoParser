@@ -88,7 +88,7 @@ namespace LoggingKata
 
                     // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
 
-                    Console.WriteLine($"The Farthest Distance is from {maxLocationA} to {maxLocationB} {ConvertToMiles(controlDistance)} miles");
+                    Console.WriteLine($"\n\nThe Farthest Distance is from {maxLocationA} to {maxLocationB} {ConvertToMiles(controlDistance)} miles");
 
                 }
             }
