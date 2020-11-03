@@ -51,32 +51,31 @@ namespace LoggingKata
                     // Include the Geolocation toolbox, so you can compare locations: `using GeoCoordinatePortable;`
                     ITrackable trackableOne = null;
                     ITrackable trackableTwo = null;
-                    double distance = 0;
-                    double controlDistance = 0;
-                    string maxLocationA = "", maxLocationB = "";
+
+                    double longestDistance = 0;
+
+                    GeoCoordinate corA = new GeoCoordinate();
+                    GeoCoordinate corB = new GeoCoordinate();
 
                     //HINT NESTED LOOPS SECTION---------------------
                     // Do a loop for your locations to grab each location as the origin (perhaps: `locA`)
-                    for (int i = 0; i < locations.Length; i++)
+                    foreach (var locA in locations)
                     {
-                        trackableOne = locations[i];
-                        GeoCoordinate locA = new GeoCoordinate(trackableOne.Location.Latitude, trackableOne.Location.Longitude);
-                        for (int j = 1; j < locations.Length; j++)
+                        corA.Latitude = locA.Location.Latitude;
+                        corA.Longitude = locA.Location.Longitude;
+                        foreach (var locB in locations)
                         {
-                            trackableTwo = locations[j];
-                            GeoCoordinate locB = new GeoCoordinate(trackableTwo.Location.Latitude, trackableTwo.Location.Longitude);
-                            distance = locA.GetDistanceTo(locB);
+                            corB.Latitude = locB.Location.Latitude;
+                            corB.Longitude = locB.Location.Longitude;
 
-                            if (distance >= controlDistance)
+                            if (corA.GetDistanceTo(corB) > longestDistance)
                             {
-                                controlDistance = distance;
-                                maxLocationA = trackableOne.Name;
-                                maxLocationB = trackableTwo.Name;
-
+                                longestDistance = corA.GetDistanceTo(corB);
+                                trackableOne = locA;
+                                trackableTwo = locB;
                             }
                         }
                     }
-
                     // Create a new corA Coordinate with your locA's lat and long
 
                     // Now, do another loop on the locations with the scope of your first loop, so you can grab the "destination" location (perhaps: `locB`)
@@ -87,8 +86,8 @@ namespace LoggingKata
                     // If the distance is greater than the currently saved distance, update the distance and the two `ITrackable` variables you set above
 
                     // Once you've looped through everything, you've found the two Taco Bells farthest away from each other.
-
-                    Console.WriteLine($"\n\nThe Farthest Distance is from {maxLocationA} to {maxLocationB} {ConvertToMiles(controlDistance)} miles");
+                    Console.Clear();
+                    Console.WriteLine($"The Farthest Distance is from {trackableOne.Name} to {trackableTwo.Name} {ConvertToMiles(longestDistance)} miles");
 
                 }
             }

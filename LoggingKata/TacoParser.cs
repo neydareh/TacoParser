@@ -33,18 +33,30 @@ namespace LoggingKata
             var name = cells[2];
 
 
-            // Your going to need to parse your string as a `double`
-            // which is similar to parsing a string as an `int`
-            double doubleLatitude = double.Parse(latitude);
-            double doubleLongitude = double.Parse(longitude);
-
-            // You'll need to create a TacoBell class
-            // that conforms to ITrackable
-            // Then, you'll need an instance of the TacoBell class
-            // With the name and point set correctly
+            double doubleLatitude, doubleLongitude;
             var point = new Point();
-            point.Latitude = doubleLatitude;
-            point.Longitude = doubleLongitude;
+
+
+            try
+            {
+
+                // Your going to need to parse your string as a `double`
+                // which is similar to parsing a string as an `int`
+                doubleLatitude = double.Parse(latitude);
+                doubleLongitude = double.Parse(longitude);
+                // You'll need to create a TacoBell class
+                // that conforms to ITrackable
+                // Then, you'll need an instance of the TacoBell class
+                // With the name and point set correctly
+                point.Latitude = doubleLatitude;
+                point.Longitude = doubleLongitude;
+            }
+            catch (FormatException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
 
             TacoBell tacoBell = new TacoBell();
             tacoBell.Name = name;
